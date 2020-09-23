@@ -1,2 +1,9 @@
-# customer-management-app
+# Customer-Management-App
+
 A customer Management CRM similar to Zoho.
+## Technologies being used are : 
+* Django
+* Postgresql
+* Jinja2
+* Python
+* Javascript
