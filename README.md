@@ -9,6 +9,6 @@ A customer Management CRM similar to Zoho.
 * Javascript
 
 ## To-Do
-[x]  Create project and initial app.
-[.]  Connect apps and create templates according to project.
-[.] Upload site to Heroku.
+[x]  Create project and initial app. <br />
+[.]  Connect apps and create templates according to project. <br />
+[.] Upload site to Heroku. <br />
