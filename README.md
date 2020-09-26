@@ -8,4 +8,7 @@ A customer Management CRM similar to Zoho.
 * Python
 * Javascript
 
-## Upload site to Heroku
+## To-Do
+[x]  Create project and initial app.
+[.]  Connect apps and create templates according to project.
+[.] Upload site to Heroku.
