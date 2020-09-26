@@ -7,3 +7,5 @@ A customer Management CRM similar to Zoho.
 * Jinja2
 * Python
 * Javascript
+
+## Upload site to Heroku
