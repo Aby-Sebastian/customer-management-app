@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 from .form import OrderForm
+from django.forms import inlineformset_factory
 # Create your views here.
 
 def index(request):
@@ -29,16 +30,20 @@ def customer(request, pk):
 	context = {'get_customer':get_customer, 'orders':orders, 'order_count':order_count}
 	return render(request, 'customer/customer.html', context=context)
 
-def createOrder(request):
-	form = OrderForm()
+def createOrder(request,pk):
+	OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=5)
+	customer = Customer.objects.get(id=pk)
+	formSet = OrderFormSet(queryset=Order.objects.none(),instance=customer)
+	# form = OrderForm(initial={'customer':customer})
 
 	if request.method == 'POST':
 		
-		form = OrderForm(request.POST)
-		if form.is_valid():
-			form.save()
+		# form = OrderForm(request.POST)
+		formSet = OrderFormSet(request.POST,instance=customer)
+		if formSet.is_valid():
+			formSet.save()
 			return redirect('/')
-	context = {'form':form}
+	context = {'formSet':formSet}
 	return render(request, 'order/order_form.html', context=context)
 
 def updateOrder(request, pk):
@@ -60,6 +65,6 @@ def deleteOrder(request, pk):
 	if request.method == 'POST':
 		order.delete()
 		return redirect('/')
-		
+
 	context = {'item':order}
 	return render(request, 'delete.html', context=context)
