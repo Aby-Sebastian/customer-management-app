@@ -11,7 +11,7 @@
 			<h5>Customer: {{ get_customer.name }}</h5>
 			<hr>
 			<a class="btn btn-outline-info  btn-sm btn-block" href="">Update Customer</a>
-			<a class="btn btn-outline-danger  btn-sm btn-block" href="{% url 'create_order' get_customer.id %}">Place Order</a>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_order' get_customer.id %}">Place Order</a>
 
 		</div>
 	</div>
@@ -40,7 +40,7 @@
 	<div class="col">
 		<div class="card card-body">
 			<form method="get">
-
+				{{ myFilter.form }}
 		    <button class="btn btn-primary" type="submit">Search</button>
 		  </form>
 		</div>
