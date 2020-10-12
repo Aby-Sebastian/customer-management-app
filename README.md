@@ -11,4 +11,5 @@ A customer Management CRM similar to Zoho.
 ## To-Do
 [x]  Create project and initial app. <br />
 [.]  Connect apps and create templates according to project. <br />
-[.] Upload site to Heroku. <br />
+[.]  Upload site to Heroku. <br />
+[.]  Search by date is note working correctly. <br />
