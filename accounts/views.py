@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 from .filters import OrderFilter
-from .form import OrderForm
+from .forms import OrderForm, CreateUserForm
 from .models import *
 
 
@@ -14,16 +14,22 @@ from .models import *
 
 
 def registerPage(request):
-	form = UserCreationForm()
+	form = CreateUserForm()
+
+	if request.method == 'POST':
+		form = CreateUserForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('login')
 
 	context={"form":form,'test':'testing'}
-	return render(request, 'user/register.html')
+	return render(request, 'user/register.html',context=context)
 
 
 def loginPage(request):
 
-	context={}
-	return render(request, 'user/login.html')
+	context = {}
+	return render(request, 'user/login.html',context=context)
 
 def index(request):
 	orders = Order.objects.all()
