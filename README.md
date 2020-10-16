@@ -13,4 +13,7 @@ A customer Management CRM similar to Zoho.
 - [x]  Connect apps and create templates according to project. <br />
 - [x]  Create Admin panel <br />
 - [x]  Create User panel <br />
-- [x]  Upload site to Heroku. <br />
+- [ ]  Complete Admin panel <br />
+- [ ]  Complete User panel <br />
+- [ ]  Convert sqlite database to postgresql <br />
+- [ ]  Upload site to Heroku. <br />
