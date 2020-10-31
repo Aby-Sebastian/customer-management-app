@@ -70,6 +70,7 @@ def index(request):
 	pending = orders.filter(status='Pending').count()
 	context = { 'orders':orders, 'customers':customers, 'total_orders':total_orders, 'delivered':delivered, 'pending':pending }
 
+	print(orders)
 	return render(request, 'dashboard/dashboard.html', context=context)
 
 
@@ -136,6 +137,7 @@ def createOrder(request,pk):
 		if formSet.is_valid():
 			formSet.save()
 			return redirect('/')
+
 	context = {'formSet':formSet}
 	return render(request, 'order/order_form.html', context=context)
 
@@ -154,7 +156,7 @@ def updateOrder(request, pk):
 			return redirect('/')
 
 	context = {'form':form}
-	return render(request, 'order/order_form.html', context=context)
+	return render(request, 'order/order_form.html', context)
 
 
 @login_required(login_url='login')
