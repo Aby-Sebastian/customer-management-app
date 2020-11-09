@@ -9,7 +9,7 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 from .filters import OrderFilter
-from .forms import OrderForm, CreateUserForm, CustomerForm
+from .forms import OrderForm, CreateUserForm, CustomerForm, CreateProductForm, CreateTagForm
 from .models import *
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
@@ -61,16 +61,16 @@ def logoutUser(request):
 @login_required(login_url='login')
 @admin_only
 def index(request):
-	orders = Order.objects.all()
+	orders = Order.objects.all().order_by('-id')
 	customers = Customer.objects.all()
+	last_5_orders = orders[:5]
 
 	total_customers = customers.count()
 	total_orders = orders.count()
 	delivered = orders.filter(status='Delivered').count()
 	pending = orders.filter(status='Pending').count()
-	context = { 'orders':orders, 'customers':customers, 'total_orders':total_orders, 'delivered':delivered, 'pending':pending }
+	context = { 'orders':last_5_orders, 'customers':customers, 'total_orders':total_orders, 'delivered':delivered, 'pending':pending }
 
-	print(orders)
 	return render(request, 'dashboard/dashboard.html', context=context)
 
 
@@ -138,7 +138,7 @@ def createOrder(request,pk):
 			formSet.save()
 			return redirect('/')
 
-	context = {'formSet':formSet}
+	context = {'form':formSet}
 	return render(request, 'order/order_form.html', context=context)
 
 
@@ -171,3 +171,32 @@ def deleteOrder(request, pk):
 	return render(request, 'order/delete.html', context=context)
 
 
+# create and delete product pages
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def createProduct(request):
+	form = CreateProductForm()
+	tag = CreateTagForm()
+
+	if request.method == 'POST':
+		form = CreateProductForm(request.POST)
+		tag = CreateTagForm(request.POST)
+		if tag.is_valid() and form.is_valid():
+			tag.save()
+			form.save()
+
+	context = {'form':form, 'tag':tag}
+	return render(request, 'products/add_products.html', context=context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def deleteProduct(request, pk):
+	product = Product.objects.get(id=pk)
+	if request.method == 'POST':
+		product.delete()
+		return redirect('/')
+
+	context = {'item': product}
+	return render(request, 'products/delete_product.html', context=context)

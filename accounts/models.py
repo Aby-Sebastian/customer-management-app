@@ -27,7 +27,7 @@ class Product(models.Model):
 		('Indoor','Indoor'),
 		('Out door','Out door')
 		)
-	name=models.CharField(max_length=200, null=True)
+	name=models.CharField(max_length=200, null=True, default='Product Deleted')
 	price=models.FloatField(null=True)
 	category=models.CharField(max_length=200, null=True, choices=CATEGORY)
 	description=models.CharField(max_length=200, null=True, blank=True)

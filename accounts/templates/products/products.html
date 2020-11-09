@@ -15,12 +15,14 @@
 							<th>Product</th>
 							<th>Category</th>
 							<th>Price</th>
+							<th>Remove</th>
 						</tr>
 						{% for produc in products %}
 							<tr>
 							<td>{{ produc.name }}</td>
 							<td>{{ produc.category }}</td>
 							<td>{{ produc.price }}</td>
+							<td><a href="{% url 'delete_product' produc.id %}" class="btn btn-sm btn-danger">Delete</a></td>
 							</tr>
 						{% endfor %}
 					</table>

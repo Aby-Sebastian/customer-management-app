@@ -22,3 +22,15 @@ class CreateUserForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ['username', 'email', 'password1', 'password2']
+
+
+class CreateProductForm(ModelForm):
+	class Meta:
+		model = Product
+		fields = '__all__'
+
+
+class CreateTagForm(ModelForm):
+	class Meta:
+		model = Tag
+		fields = '__all__'
